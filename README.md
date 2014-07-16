@@ -4,7 +4,7 @@
 
 ## Demo参考
 
-<http://demo.webjyh.com>
+<http://demo.webjyh.com/MDialog/>
 
 ## 如何使用插件
 
@@ -32,15 +32,14 @@ $M({
 
 ## 程序说明
 
-[1]: 插件不支持 框架 穿透弹窗！
-[2]: 本人也是在学习 JavaScript ，程序在使用时避免不了出现意外的Bug和缺少功能。
-[3]: 在使用前，请认真阅读插件文档。
-[4]: 如本插件有幸应用到你的项目中，谢谢你的支持。
-[5]: 程序兼容性: 理论兼容IE6+，Google Chrome, FireFox，但在IE6下难免会出现以外的Bug。
-[6]: 意见反馈: 如有一些使用问题或者插件的Bug，请到 我的博客 里联系我
+1. 插件不支持 框架 穿透弹窗！
+2. 本人也是在学习 JavaScript ，程序在使用时避免不了出现意外的Bug和缺少功能。
+3. 在使用前，请认真阅读插件文档。
+4. 如本插件有幸应用到你的项目中，谢谢你的支持。
+5. 程序兼容性: 理论兼容IE6+，Google Chrome, FireFox，但在IE6下难免会出现以外的Bug。
+6. 意见反馈: 如有一些使用问题或者插件的Bug，请到 我的博客 里联系我
 
 ## 联系作者
 
-Blog：<http://webjyh.com>
-
+Blog：<http://webjyh.com> 
 Weibo：<http://weibo.com/webjyh/>
