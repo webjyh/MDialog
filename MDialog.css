@@ -1,0 +1,210 @@
+/**
+ * M.Dialog 1.0.0
+ * Date: 2014-07-10
+ * (c) 2014-2014 M.J, http://webjyh.com
+ *
+ * This is licensed under the GNU LGPL, version 2.1 or later.
+ * For details, see: http://creativecommons.org/licenses/LGPL/2.1/
+ *
+ */
+/* MDialog ui-wrap */
+.ui-dialog-wrap {
+	width: auto;
+	background: #cbcbcb;
+	font-family: Helvetica, arial, sans-serif;
+	font-size: 14px;
+	color: #555;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	-webkit-animation:transform-scale .3s;
+	        animation:transform-scale .3s;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+}
+.ui-dialog-wrap.ui-dialog-focus {
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2 );
+}
+
+.ui-dialog-wrap .MDialog-wrapper {
+	margin: 5px;
+}
+
+/* MDialog ui-table */
+.ui-dialog-wrap .ui-dialog-table { 
+	background-color: #FFF;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+.ui-dialog-wrap .ui-dialog-table thead,
+.ui-dialog-wrap .ui-dialog-table tbody,
+.ui-dialog-wrap .ui-dialog-table tfoot,
+.ui-dialog-wrap .ui-dialog-table th,
+.ui-dialog-wrap .ui-dialog-table tr,
+.ui-dialog-wrap .ui-dialog-table td { 
+	background-color: #FFF;
+	padding: 0px;
+	margin: 0px;
+}
+/* MDialog ui-header */
+.ui-dialog-wrap .ui-dialog-header {
+	position: relative;
+	border-bottom: 1px solid #DDD;
+}
+
+/* MDialog ui-title */
+.ui-dialog-wrap .ui-dialog-title {
+	font-weight: bold;
+	padding: 15px 35px 15px 10px;
+	white-space: nowrap;
+	overflow: hidden;
+	cursor: move;
+	text-overflow: ellipsis;
+}
+
+/* MDialog ui-close */
+.ui-dialog-wrap a:link.ui-dialog-close,
+.ui-dialog-wrap a:visited.ui-dialog-close {
+	position: absolute;
+	display: block;
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	text-align: center;
+	right: 10px;
+	top: 50%;
+	font-weight: bold;
+	font-size: 16px;
+	margin-top: -9px;
+	text-decoration: none;
+	color: #AAA9A9;
+	outline: none;
+	border-radius: 2px;
+	overflow: hidden;
+	color: #FFF;
+	background: #BBB;
+	-webkit-transition: all 0.3s;
+	   -moz-transition: all 0.3s;
+	        transition: all 0.3s;
+}
+
+.ui-dialog-wrap a:hover.ui-dialog-close,
+.ui-dialog-wrap a:active.ui-dialog-close {
+	background-color: red;
+	color: #FFF;
+	-webkit-transform: rotate(360deg);
+	   -moz-transform: rotate(360deg);
+	        transform: rotate(360deg); 
+}
+
+
+/* MDialog ui-content */
+.ui-dialog-wrap .ui-dialog-content {
+
+}
+
+/* MDialog ui-footer */
+.ui-dialog-wrap .ui-dialog-footer {
+	padding: 0px 15px 15px;
+}
+
+/* MDialog ui-dialog-statusbar */
+.ui-dialog-wrap .ui-dialog-statusbar {
+	float: left;
+	padding: 3px 0px;
+	color: #888;
+	font-size:13px;
+	white-space: nowrap;
+	margin-right: 20px;
+}
+
+/* MDialog ui-bottom */
+.ui-dialog-wrap .ui-dialog-bottom {
+	float: right;
+	white-space: nowrap;
+}
+
+.ui-dialog-wrap .ui-dialog-bottom button {
+	width: auto;
+	display: inline-block;
+	margin:0px 2px;
+	padding: 4px 15px;
+	text-align: center;
+	white-space: nowrap;
+	text-align: center;
+	cursor: pointer;
+	border: 1px solid #CCC;
+	color: #333;
+	margin-bottom: 0px;
+	background-color: #FFF;
+	outline:none;
+	border-radius: 2px;
+	*zoom: 1;
+	*padding: 0px 8px;
+}
+
+.ui-dialog-wrap .ui-dialog-bottom button:hover {
+	color: #333333;
+	background-color: #ebebeb;
+	border-color: #adadad;
+}
+
+.ui-dialog-wrap .ui-dialog-bottom button:active {
+	-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+	   -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+	        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); 
+}
+
+.ui-dialog-wrap .ui-dialog-bottom button.ui-dialog-autofocus {
+	color: #FFF;
+	background-color: #3276B1;
+	border-color: #357EBD;
+}
+
+.ui-dialog-wrap .ui-dialog-bottom button.ui-dialog-disabled {
+	background-color: #FFF;
+	border-color: #CCC;
+	color: #999;
+	cursor: not-allowed;
+}
+
+/* 防止动画过程有闪烁 */
+.ui-dialog-wrap a:link.ui-dialog-close,
+.ui-dialog-wrap a:visited.ui-dialog-close,
+.ui-dialog-wrap a:hover.ui-dialog-close,
+.ui-dialog-wrap a:active.ui-dialog-close,
+.ui-dialog-lock,
+.ui-dialog-wrap {
+	-webkit-backface-visibility: hidden;
+	   -moz-backface-visibility: hidden;
+	    -ms-backface-visibility: hidden;
+	        backface-visibility: hidden;
+
+	-webkit-perspective: 1000;
+	   -moz-perspective: 1000;
+	    -ms-perspective: 1000;
+	        perspective: 1000;
+}
+
+.ui-dialog-lock {
+	-webkit-animation:lock-fadeIn .3s;
+	        animation:lock-fadeIn .3s;  
+}
+
+@keyframes lock-fadeIn {
+	0% { opacity:0; }
+}
+
+@-webkit-keyframes lock-fadeIn {
+	0% { opacity:0; }
+}
+
+@keyframes transform-scale {
+	0% { transform:scale(0); }
+	100%{ transform:scale(1); }
+}
+
+@-webkit-keyframes transform-scale {
+	0% { -webkit-transform:scale(0); }
+	100%{ -webkit-transform:scale(1); }
+}
