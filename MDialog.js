@@ -953,6 +953,13 @@
 		drag: true                  //是否支持拖拽
 	};
 
+	//支持AMD加载
+	if ( typeof define = 'function' && define.amd ){
+		define( 'MDialog', [], function(){
+			return MDialog;
+		});
+	}
+	
 	//返回对象给全局
 	win.MDialog = $M = MDialog;
 
