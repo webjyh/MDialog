@@ -954,7 +954,7 @@
 	};
 
 	//支持AMD加载
-	if ( typeof define = 'function' && define.amd ){
+	if ( typeof define === 'function' && define.amd ){
 		define( 'MDialog', [], function(){
 			return MDialog;
 		});
