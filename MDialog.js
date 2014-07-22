@@ -1,6 +1,7 @@
 /**
- * M.Dialog 1.0.0
+ * M.Dialog 1.1.0
  * Date: 2014-07-10
+ * Update: 2014-07-22
  * (c) 2014-2014 M.J, http://webjyh.com
  *
  * This is licensed under the GNU LGPL, version 2.1 or later.
@@ -20,7 +21,7 @@
 		return new MDialog.fn.init( options );
 	};
 
-	MDialog.version = '1.0.0';
+	MDialog.version = '1.1.0';
 
 	//扩展原型，使上面返回的 new 对象 继承以下方法和属性。
 	MDialog.fn = MDialog.prototype = {
@@ -87,6 +88,21 @@
 		 	this._title( text );
 		 	this._position( this.config.top, this.config.left, true );
 		 	return this;
+		},
+
+		/**
+		 * @access    Public
+		 * @name      设置是否隐藏标题, 并是否显示关闭按钮
+		 * @param     val     {Boolean}     是否显示关闭按钮
+		 * @return    {this}
+		 */
+		untitle: function( val ){
+			var DOM = this.DOM;
+			this.config.untitle = true;
+			val && ( this.config.unclose = true );
+			this._title( this.config.title );
+			this._position( this.config.top, this.config.left, true );
+			return this;
 		},
 
 		/**
@@ -178,6 +194,7 @@
 		 * @return    {this}
 		 */
 		width: function( val ){
+			this.config.width = val;
 			this._size( 'width', val );
 			return this;
 		},
@@ -189,6 +206,7 @@
 		 * @return    {this}
 		 */
 		height: function( val ){
+			this.config.height = val;
 			this._size( 'height', val );
 			return this;
 		},
@@ -201,6 +219,7 @@
 		 */
 		padding: function( val ){
 			var DOM = this.DOM;
+			this.config.padding = val;
 			DOM._content()._padding( val );
 			this._position( this.config.top, this.config.left, true );
 			return this;
@@ -239,6 +258,20 @@
 		},
 
 		/**
+		 * @access    Public
+		 * @name      设置弹窗内容为 一个 iframe 地址。
+		 * @example   this.iframe( 'http://www.baidu.com' );
+		 * @return    {this}
+		 */
+		iframe: function( url ){
+			this.config.iframe = true;
+			this.config.top = '50%';
+			this._content( url );
+			this._position( this.config.top, this.config.left, true );
+			return this;
+		},
+
+		/**
 		 * @access    Private
 		 * @name      将默认配置和选项合并
 		 * @param     options     {Object}     默认用户的参数
@@ -261,6 +294,12 @@
 		_title: function( text ){
 			var DOM = this.DOM;
 		 	DOM._title()._text( text );
+		 	if ( this.config.untitle ){
+		 		DOM._title()._hide();
+		 		DOM._close()._addClass('untitle');
+		 		this.config.drag = false;
+		 	}
+		 	this.config.unclose && DOM._close()._hide();
 		 	return this;
 		},
 
@@ -271,8 +310,10 @@
 		 * @return    {this}
 		 */
 		_content: function( msg ){
-		 	var DOM = this.DOM;
-		 	DOM._content()._html( msg );
+		 	var DOM = this.DOM,
+		 	    html = '';
+		 	( this.config.iframe ) ? html = '<iframe id="MDialog_IFRAME" name="MDialog_IFRAME" width="'+this.config.width+'" height="'+this.config.height+'" scrolling="auto" src="'+ msg +'" frameborder="0"></iframe>' : html = msg;
+		 	DOM._content()._html( html );
 		 	return this;
 		},
 
@@ -927,10 +968,12 @@
 	//默认参数
 	MDialog.defaults = {
 		title: '\u6d88\u606f',      //默认标题消息
+		untitle: false,             //是否显示标题
 		content: 'Loading....',     //默认内容
 		statusbar: null,            //默认对话框左下脚内容
 		init: null,                 //默认载入弹窗之后回调函数
 		close: null,                //点击关闭按钮之后回调函数
+		unclose: false,             //是否显示关闭按钮
 		width: 'auto',              //默认宽度
 		height: 'auto',             //默认高度
 		padding: '20px 15px',       //设置默认填充
@@ -950,6 +993,7 @@
 		cancelVal: '\u53d6\u6d88',  //取消按钮文字
 		button: null,               //默认自定义按钮
 		resize: true,               //是否绑定resize
+		iframe: false,              //设置内容是否为iframe
 		drag: true                  //是否支持拖拽
 	};
 

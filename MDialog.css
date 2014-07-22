@@ -1,6 +1,7 @@
 /**
- * M.Dialog 1.0.0
+ * M.Dialog 1.1.0
  * Date: 2014-07-10
+ * Update: 2014-07-22
  * (c) 2014-2014 M.J, http://webjyh.com
  *
  * This is licensed under the GNU LGPL, version 2.1 or later.
@@ -61,7 +62,6 @@
 	cursor: move;
 	text-overflow: ellipsis;
 }
-
 /* MDialog ui-close */
 .ui-dialog-wrap a:link.ui-dialog-close,
 .ui-dialog-wrap a:visited.ui-dialog-close {
@@ -97,6 +97,17 @@
 	        transform: rotate(360deg); 
 }
 
+
+.ui-dialog-wrap .ui-dialog-header .untitle {
+	width: 25px !important;
+	height: 25px !important;
+	top: 0px !important;
+	right: 0px !important;
+	border-radius: 50% !important;
+	line-height: 24px !important;
+	box-shadow: 0px 0px 5px rgba( 0, 0, 0, 0.3 );
+	margin: -12px -12px 0px 0px !important;
+}
 
 /* MDialog ui-content */
 .ui-dialog-wrap .ui-dialog-content {

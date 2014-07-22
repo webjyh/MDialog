@@ -6,6 +6,14 @@
 
 <http://demo.webjyh.com/MDialog/>
 
+## Update Ver 1.1  (2014-07-22)
+
+1. 增加 untitle, unclose, iframe 配置参数
+2. 增加 untitle( Boolean ), iframe( URL ) 方法
+3. 支持 AMD的方式 加载  如 require.js
+4. 修正若干 Bug
+5. 新增加的配置参数和方法，请到Demo页查看具体使用方法
+
 ## 如何使用插件
 
 ```html

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>MDialog Beta v1.0  || By M.J</title>
+	<title>MDialog Beta v1.1  || By M.J</title>
 
 	<!--Page CSS-->
 	<link rel="stylesheet" href="css/Global.css">
@@ -12,8 +12,8 @@
 	<script type="text/javascript">var isChrome = window.navigator.userAgent.indexOf('Chrome') !== -1;</script>
 	
 	<!-- MDialog css && JS -->
-	<link rel="stylesheet" href="MDialog.css?ver=1.0.0">
-	<script type="text/javascript" src="MDialog.js?ver=1.0.0"></script>
+	<link rel="stylesheet" href="MDialog.css?ver=1.1.0">
+	<script type="text/javascript" src="MDialog.js?ver=1.1.0"></script>
 	
 </head>
 <body>
@@ -23,12 +23,13 @@
 	<div class="wrapper">
 		<div class="wrapper-inner">
 
-			<h1 id="h1" title="MDialog Beta v1.0">MDialog  <small>Beta  v1.0</small></h1>
+			<h1 id="h1" title="MDialog Beta v1.1">MDialog  <small>Beta  v1.1</small></h1>
 			<div class="desc">
 				<p>寻求简单，精简的网页对话框，专注于友好的接口，千里之行，始于足下。</p>
 			</div>
 			<div class="menu block" id="menu">
 				<div class="breadcrumb" id="nav">
+                    <a href="https://github.com/webjyh/MDialog/archive/master.zip" target="_blank">[下载本插件]</a>
 					<span></span>
 					文档与导航
 				</div>
@@ -39,11 +40,13 @@
 							<li><a href="#moudle" title="如何使用插件">如何使用插件</a></li>
 							<li><a href="#quick-basic" title="普通对话框">普通对话框</a></li>
 							<li><a href="#quick-interactive" title="交互对话框">交互对话框</a></li>
+                            <li><a href="#quick-bubble" title="气泡对话框">气泡对话框</a></li>
 							<li><a href="#quick-button" title="添加按钮">添加按钮</a></li>
 							<li><a href="#quick-close" title="自动关闭对话框">自动关闭对话框</a></li>
 							<li><a href="#quick-html" title="底部添加HTML">底部添加HTML</a></li>
 							<li><a href="#quick-unclose" title="阻止对话框关闭">阻止对话框关闭</a></li>
-							<li><a href="#quick-noclose" title="不显示关闭按钮">不显示关闭按钮</a></li>
+							<li><a href="#quick-noclose" title="不显示取消按钮">不显示取消按钮</a></li>
+                            <li><a href="#quick-iframe" title="弹出内容为iframe引用">iframe引用的内容</a></li>
                             <li class="line">[联系作者]</li>
                             <li><a href="#desc" title="程序说明">程序说明</a></li>
                             <li><a href="#author" title="作者本人">作者：M.J</a></li>
@@ -57,16 +60,18 @@
 							<li><a href="#options-content" title="设置内容">content</a></li>
 							<li><a href="#options-statusbar" title="设置底部">statusbar</a></li>
 							<li class="line">[外观]</li>
+                            <li><a href="#options-untitle" title="隐藏标题">untitle</a></li>
+                            <li><a href="#options-unclose" title="隐藏关闭按钮">unclose</a></li>
 							<li><a href="#options-width" title="设置宽度">width</a></li>
 							<li><a href="#options-height" title="设置高度">height</a></li>
 							<li><a href="#options-padding" title="设置填充值">padding</a></li>
 							<li class="line">[回调函数]</li>
 							<li><a href="#options-init" title="载入之后回调函数">init</a></li>
 							<li><a href="#options-close" title="关闭之后回调函数">close</a></li>
-							<li class="line">[其他]</li>
-							<li><a href="#options-id" title="设置ID">id</a></li>
-							<li><a href="#options-resize" title="绑定resize事件">resize</a></li>
-							<li><a href="#options-drag" title="拖拽事件">drag</a></li>
+                            <li class="line">[位置]</li>
+                            <li><a href="#options-left" title="距离窗口左边位置">left</a></li>
+                            <li><a href="#options-top" title="距离窗口上边位置">top</a></li>
+                            <li><a href="#options-zIndex" title="设置z-index值">zIndex</a></li>
 						</ul>
 					</div>
 					<div class="clearfix">
@@ -79,22 +84,24 @@
 							<li><a href="#options-fixed" title="弹窗绝对定位">fixed</a></li>
 							<li><a href="#options-esc" title="Esc键盘事件">esc</a></li>
 							<li><a href="#options-time" title="自动关闭时间">time</a></li>
-							<li class="line">[位置]</li>
-							<li><a href="#options-left" title="距离窗口左边位置">left</a></li>
-							<li><a href="#options-top" title="距离窗口上边位置">top</a></li>
-							<li><a href="#options-zIndex" title="设置z-index值">zIndex</a></li>
 							<li class="line">[按钮]</li>
-							<li><a href="#options-ok" title="确定按钮">ok</a></li>
-							<li><a href="#options-cancel" title="取消按钮">cancel</a></li>
-							<li><a href="#options-okVal" title="确定按钮文字">okVal</a></li>
-							<li><a href="#options-cancelVal" title="取消按钮文字">cancelVal</a></li>
-							<li><a href="#options-button" title="自定义按钮">button</a></li>
+                            <li><a href="#options-ok" title="确定按钮">ok</a></li>
+                            <li><a href="#options-cancel" title="取消按钮">cancel</a></li>
+                            <li><a href="#options-okVal" title="确定按钮文字">okVal</a></li>
+                            <li><a href="#options-cancelVal" title="取消按钮文字">cancelVal</a></li>
+                            <li><a href="#options-button" title="自定义按钮">button</a></li>
+							<li class="line">[其他]</li>
+                            <li><a href="#options-id" title="设置ID">id</a></li>
+                            <li><a href="#options-resize" title="绑定resize事件">resize</a></li>
+                            <li><a href="#options-drag" title="拖拽事件">drag</a></li>
+                            <li><a href="#options-iframe" title="设置弹窗内容是否为iframe">iframe</a></li>
 						</ul>
 					</div>
 					<div class="last clearfix">
 						<h3>扩展方法</h3>
 						<ul class="clearfix">
 							<li><a href="#function-title" title="标题方法">title( Text )</a></li>
+                            <li><a href="#function-untitle" title="隐藏标题并且设置是否显示关闭按钮">untitle( Boolean )</a></li>
 							<li><a href="#function-content" title="内容方法">content( HTML )</a></li>
 							<li><a href="#function-statusbar" title="底部内容方法">statusbar( HTML )</a></li>
 							<li><a href="#function-time" title="自动关闭方法">time( Number )</a></li>
@@ -106,6 +113,7 @@
 							<li><a href="#function-padding" title="设置填充值方法">padding( Value )</a></li>
 							<li><a href="#function-position" title="设置定位方法">position( top, left )</a></li>
 							<li><a href="#function-button" title="自定义按钮方法">button( Array )</a></li>
+                            <li><a href="#function-iframe" title="设置弹窗内容为iframe">iframe( URL )</a></li>
 						</ul>
 					</div>
 				</div>
@@ -123,6 +131,7 @@ HTML5 申明 &lt;!DOCTYPE HTML&gt;
 &lt;link rel="stylesheet" href="MDialog.css"&gt;
 &lt;script type="text/javascript" src="MDialog.js"&gt;&lt;/script&gt;
 </code></pre>
+<button style="display:none;">运行</button>
 </div>
 
 
@@ -133,7 +142,7 @@ HTML5 申明 &lt;!DOCTYPE HTML&gt;
     content:'&lt;p&gt;欢迎使用 MDialog 对话框！&lt;/p&gt;'
 });
 </code></pre>
-<button data-index="1">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -146,7 +155,22 @@ HTML5 申明 &lt;!DOCTYPE HTML&gt;
     lock: true
 });
 </code></pre>
-<button data-index="2">运行</button>
+<button>运行</button>
+</div>
+
+
+<div class="box" id="quick-bubble">
+<h3>气泡对话框</h3>
+<pre><code>$M({
+    title: 'MDialog',
+    untitle: true,
+    unclose: true,
+    time: 3,
+    content:'我是气泡对画框，三秒后自动关闭',
+    fixed: true
+});
+</code></pre>
+<button>运行</button>
 </div>
 
 
@@ -164,7 +188,7 @@ $M({
     cancelVal: '关闭'
 });
 </code></pre>
-<button data-index="3">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -176,7 +200,7 @@ $M({
     time: 3
 });
 </code></pre>
-<button data-index="4">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -189,7 +213,7 @@ $M({
     ok: false
 });
 </code></pre>
-<button data-index="5">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -209,19 +233,36 @@ $M({
     esc: false
 });
 </code></pre>
-<button data-index="6">运行</button>
+<button>运行</button>
 </div>
 
 
 <div class="box" id="quick-noclose">
-<h3>不显示关闭按钮</h3>
+<h3>不显示取消按钮</h3>
 <pre><code>$M({
     title: 'MDialog',
     content: '&lt;p&gt;欢迎使用 MDialog 对话框！&lt;/p&gt;',
     ok: false
 });
 </code></pre>
-<button data-index="7">运行</button>
+<button>运行</button>
+</div>
+
+<div class="box" id="quick-iframe">
+<h3>iframe 引用的内容</h3>
+<pre><code>$M({
+    title: 'MDialog',
+    iframe: true,
+    padding: 0,
+    top: '50%',
+    fixed: true,
+    width: '800px',
+    height: '600px',
+    untitle: true,
+    content: 'http://www.baidu.com/'
+});
+</code></pre>
+<button>运行</button>
 </div>
 
 
@@ -233,7 +274,7 @@ $M({
     content: '&lt;p&gt;欢迎使用 MDialog 对话框！&lt;/p&gt;'
 });
 </code></pre>
-<button data-index="8">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -244,7 +285,7 @@ $M({
     content: '欢迎使用 MDialog 对话框！'
 });
 </code></pre>
-<button data-index="9">运行</button>
+<button>运行</button>
 
 <p><span>//HTMLElement 类型</span></p>
 <pre><code>var elem = document.getElementById('h1').innerHTML;
@@ -252,7 +293,7 @@ $M({
     content: elem
 });
 </code></pre>
-<button data-index="10">运行</button>
+<button>运行</button>
 </div>
 
 <div class="box" id="options-statusbar">
@@ -264,7 +305,7 @@ $M({
     statusbar: '底部文字'
 });
 </code></pre>
-<button data-index="11">运行</button>
+<button>运行</button>
 
 <p><span>//HTMLElement 类型</span></p>
 <pre><code>$M({
@@ -274,9 +315,32 @@ $M({
     ok: false
 });
 </code></pre>
-<button data-index="12">运行</button>
+<button>运行</button>
 </div>
 
+<div class="box" id="options-untitle">
+<h3>[untitle] <span>说明：设置是否显示标题元素</span><span>默认：false</span><span>类型：(Boolean)</span></h3>
+<pre><code>$M({
+    title: '我是标题',
+    untitle: true,
+    content: '&lt;p&gt;欢迎使用 MDialog 对话框！&lt;/p&gt;'
+});
+</code></pre>
+<button>运行</button>
+</div>
+
+<div class="box" id="options-unclose">
+<h3>[unclose] <span>说明：设置是否显示关闭按钮</span><span>默认：false</span><span>类型：(Boolean)</span></h3>
+<pre><code>$M({
+    title: 'MDialog Title',
+    untitle: true,
+    unclose: true,
+    time: 3,
+    content: '三秒后自动关闭弹窗。'
+});
+</code></pre>
+<button>运行</button>
+</div>
 
 <div class="box" id="options-width">
 <h3>[width] <span>说明：设置对话框宽度</span><span>默认：'auto'</span><span>类型：(String)</span></h3>
@@ -285,7 +349,7 @@ $M({
     width: '300px'
 });
 </code></pre>
-<button data-index="13">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -296,7 +360,7 @@ $M({
     height: '300px'
 });
 </code></pre>
-<button data-index="14">运行</button>
+<button>运行</button>
 </div>
 
 <div class="box" id="options-padding">
@@ -309,7 +373,7 @@ $M({
     }
 });
 </code></pre>
-<button data-index="15">运行</button>
+<button>运行</button>
 </div>
 
 <div class="box" id="options-init">
@@ -321,7 +385,7 @@ $M({
     }
 });
 </code></pre>
-<button data-index="16">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -334,7 +398,7 @@ $M({
     }
 });
 </code></pre>
-<button data-index="17">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -345,7 +409,7 @@ $M({
     id: 'text'
 });
 </code></pre>
-<button data-index="18">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -357,7 +421,7 @@ $M({
     height: '300px'
 });
 </code></pre>
-<button data-index="19">运行</button>
+<button>运行</button>
 </div>
 
 <div class="box" id="options-drag">
@@ -367,7 +431,7 @@ $M({
     drag: false
 });
 </code></pre>
-<button data-index="20">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -378,7 +442,7 @@ $M({
     lock: true
 });
 </code></pre>
-<button data-index="21">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -390,7 +454,7 @@ $M({
     lock: true
 });
 </code></pre>
-<button data-index="22">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -402,7 +466,7 @@ $M({
     lock: true
 });
 </code></pre>
-<button data-index="23">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -414,7 +478,7 @@ $M({
     fixed: true
 });
 </code></pre>
-<button data-index="24">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -425,7 +489,7 @@ $M({
     esc: true
 });
 </code></pre>
-<button data-index="25">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -436,7 +500,7 @@ $M({
     time: 3
 });
 </code></pre>
-<button data-index="26">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -448,7 +512,7 @@ $M({
     left: '100px'
 });
 </code></pre>
-<button data-index="27">运行</button>
+<button>运行</button>
 
 <p><span>//百分比为单位</span></p>
 <pre><code>$M({
@@ -456,7 +520,7 @@ $M({
     left: '100%'
 });
 </code></pre>
-<button data-index="28">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -469,7 +533,7 @@ $M({
     left: '100px'
 });
 </code></pre>
-<button data-index="29">运行</button>
+<button>运行</button>
 
 <p><span>//百分比为单位</span></p>
 <pre><code>$M({
@@ -478,7 +542,7 @@ $M({
     left: '100%'
 });
 </code></pre>
-<button data-index="30">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -489,7 +553,7 @@ $M({
     zIndex: 1999
 });
 </code></pre>
-<button data-index="31">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -504,7 +568,7 @@ $M({
     }
 });
 </code></pre>
-<button data-index="32">运行</button>
+<button>运行</button>
 
 <p><span>//设置为其它任何类型，点击按钮都是关闭对话框</span></p>
 <pre><code>$M({
@@ -512,7 +576,7 @@ $M({
     ok: true
 });
 </code></pre>
-<button data-index="33">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -531,7 +595,7 @@ $M({
     }
 });
 </code></pre>
-<button data-index="34">运行</button>
+<button>运行</button>
 
 <p><span>//设置为其它任何类型，点击按钮都是关闭对话框</span></p>
 <pre><code>$M({
@@ -539,7 +603,7 @@ $M({
     cancel: true
 });
 </code></pre>
-<button data-index="35">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -553,7 +617,7 @@ $M({
     okVal: '点击我'
 });
 </code></pre>
-<button data-index="36">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -567,7 +631,7 @@ $M({
     cancelVal: '关闭我'
 });
 </code></pre>
-<button data-index="37">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -631,7 +695,30 @@ $M({
     ]
 });
 </code></pre>
-<button data-index="38">运行</button>
+<button>运行</button>
+</div>
+
+
+<div class="box" id="options-iframe">
+<h3>[iframe] <span>说明：引入一个 iframe 内容</span><span>默认： false</span><span>类型：( String )</span></h3>
+<p>
+    <span>//在设置 iframe 内容时，content: 参数只需要填写网址即可，并且需设置弹窗的宽高，因无法自适应获取iframe的宽高<br />
+    //需要在页面操作 iframe 的DOMN时，可以使用 window.frames['MDialog_IFRAME']; iframe ID 和 name 名都为 MDialog_IFRAME<br />
+    //PS：请不要 跨域操作。</span>
+</p>
+<pre><code>$M({
+    title: '百度一下，你就知道',
+    content: 'http://www.baidu.com',
+    top: '50%',
+    untitle: true,
+    padding: 0,
+    width: '800px',
+    height: '500px',
+    iframe: true,
+    fixed: true
+});
+</code></pre>
+<button>运行</button>
 </div>
 
 
@@ -647,7 +734,35 @@ $M({
 });
 m.title('我是新标题');
 </code></pre>
-<button data-index="39">运行</button>
+<button>运行</button>
+</div>
+
+
+<h2><strong>配置选项</strong><span></span></h2>
+<div class="box" id="function-untitle">
+<h3>[untitle( Boolean )] <span>说明：设置对话框隐藏标题，并且设置是否显示关闭按钮，支持链式调用</span><span>默认： false</span><span>类型：(Boolean)</span></h3>
+
+<p><span>//显示关闭按钮</span></p>
+<pre><code>var m = $M({
+    title: '我是默认标题',
+    content: '我隐藏了标题！',
+    fixed: true,
+    padding: '10px 20px'
+});
+m.untitle();
+</code></pre>
+<button>运行</button>
+
+<p><span>//隐藏关闭按钮</span></p>
+<pre><code>var m = $M({
+    title: '我是默认标题，3秒后自动关闭',
+    content: '我隐藏了标题和关闭按钮！',
+    fixed: true,
+    padding: '10px 20px'
+});
+m.untitle(true).time(3);
+</code></pre>
+<button>运行</button>
 </div>
 
 
@@ -661,7 +776,7 @@ m.title('我是新标题');
 });
 m.content('我改变了对话框的内容');
 </code></pre>
-<button data-index="40">运行</button>
+<button>运行</button>
 </div>
 
 <div class="box" id="function-statusbar">
@@ -674,7 +789,7 @@ m.content('我改变了对话框的内容');
 });
 m.statusbar('我是底部文字');
 </code></pre>
-<button data-index="41">运行</button>
+<button>运行</button>
 </div>
 
 <div class="box" id="function-time">
@@ -684,7 +799,7 @@ m.statusbar('我是底部文字');
 });
 m.time(3);
 </code></pre>
-<button data-index="42">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -699,7 +814,7 @@ m.time(3);
     }
 });
 </code></pre>
-<button data-index="43">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -713,7 +828,7 @@ m.time(3);
 });
 m.lock();
 </code></pre>
-<button data-index="44">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -727,7 +842,7 @@ m.lock();
     }
 });
 </code></pre>
-<button data-index="45">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -743,7 +858,7 @@ m.lock();
 });
 m.width(400);
 </code></pre>
-<button data-index="46">运行</button>
+<button>运行</button>
 
 <p><span>//字符串和其它单位</span></p>
 <pre><code>var m = $M({
@@ -754,7 +869,7 @@ m.width(400);
 });
 m.width('30em');
 </code></pre>
-<button data-index="47">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -770,7 +885,7 @@ m.width('30em');
 });
 m.height(300);
 </code></pre>
-<button data-index="48">运行</button>
+<button>运行</button>
 
 <p><span>//字符串和其它单位</span></p>
 <pre><code>var m = $M({
@@ -781,7 +896,7 @@ m.height(300);
 });
 m.height('20em');
 </code></pre>
-<button data-index="49">运行</button>
+<button>运行</button>
 
 
 <p><span>//同时设置高和宽</span></p>
@@ -793,7 +908,7 @@ m.height('20em');
 });
 m.width(300).height(200);
 </code></pre>
-<button data-index="50">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -809,7 +924,7 @@ m.width(300).height(200);
 });
 m.padding(0);
 </code></pre>
-<button data-index="51">运行</button>
+<button>运行</button>
 
 <p><span>//设置字符串类型</span></p>
 <pre><code>var m = $M({
@@ -820,7 +935,7 @@ m.padding(0);
 });
 m.padding('5em');
 </code></pre>
-<button data-index="52">运行</button>
+<button>运行</button>
 </div>
 
 
@@ -836,7 +951,7 @@ m.padding('5em');
 });
 m.position(100, 100);
 </code></pre>
-<button data-index="53">运行</button>
+<button>运行</button>
 
 
 <p><span>//字符串类型和其它单位</span></p>
@@ -848,7 +963,7 @@ m.position(100, 100);
 });
 m.position( '100%', 0 );
 </code></pre>
-<button data-index="54">运行</button>
+<button>运行</button>
 
 <p><span>//五个方向的弹窗位置</span></p>
 <pre><code>$M({
@@ -887,14 +1002,14 @@ m.position( '100%', 0 );
     ]
 });
 </code></pre>
-<button data-index="55">运行</button>
+<button>运行</button>
 </div>
 
 
 <div class="box" id="function-button">
 <h3>[button( Array )] <span>说明：增加自定义按钮方法，支持链式调用</span><span>类型：(Array)</span></h3>
 
-<p><span>此方法配置成员请相见    配置参数 <a href="#options-button">[button]</a></span></p>
+<p><span>此方法配置成员请参见    配置参数 <a href="#options-button">[button]</a></span></p>
 <pre><code>var m = $M({
     content: '欢迎使用 MDialog 对话框！'
 });
@@ -928,7 +1043,21 @@ m.button([
     }
 ]);
 </code></pre>
-<button data-index="56">运行</button>
+<button>运行</button>
+</div>
+
+
+<div class="box" id="function-iframe">
+<h3>[iframe( URL )] <span>说明：将对话框内容设置为 iframe 引用的内容，支持链式调用</span><span>类型：( String )</span></h3>
+<p><span>此方法配置注意事项请参见    配置参数<a href="#options-iframe">[iframe]</a></span></p>
+<pre><code>var m = $M({
+    title: 'iframe 内容测试',
+    fixed: true,
+    content: 'iframe 内容测试'
+});
+m.padding(0).width(800).height(600).untitle().iframe('http://www.baidu.com').lock();
+</code></pre>
+<button>运行</button>
 </div>
 
 
@@ -1024,7 +1153,7 @@ m.button([
 
                 href = target.getAttribute('href').toString().replace( '#', '' );
                 top = document.getElementById(href).offsetTop;
-                fix = ( menu.className.toString().indexOf('fixed') > -1 ) ? 42 : 332 + 42 * 2;
+                fix = ( menu.className.toString().indexOf('fixed') > -1 ) ? 42 : 384 + 42 * 2;
                 window.scrollTo( 0, top - fix );
 
             }
@@ -1067,6 +1196,7 @@ m.button([
 
         i = 0;
         for ( ; i<buttonLen; i++ ){
+            button[i].setAttribute('data-index', i);
             button[i].onclick = function(){
                 var index = this.getAttribute('data-index');
                 code[index]();
