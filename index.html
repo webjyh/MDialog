@@ -1140,7 +1140,7 @@ m.padding(0).width(800).height(600).untitle().iframe('http://www.baidu.com').loc
 
         var link = function( event ){
             var event = event || window.event,
-                target = event.target,
+                target = event.target || event.srcElement,
                 href, top;
 
             if ( event.target.nodeName === 'A' ){
@@ -1204,5 +1204,11 @@ m.padding(0).width(800).height(600).untitle().iframe('http://www.baidu.com').loc
         }
     }());
     </script>
+	<p style="display:none;">
+		<script type="text/javascript">
+		var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fad10be86eec597d23cb46147a8e8dbba' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</p>
 </body>
 </html>
