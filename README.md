@@ -6,6 +6,18 @@
 
 <http://demo.webjyh.com/MDialog/>
 
+## Update Ver 2.0  (2014-10-09)
+此版本增加了 iframe 框架功能，及一些弹窗细节修改
+
+1. 增加了弹窗的最小宽和高度
+2. 增加了气泡对话框简洁方法 $M().msg( content ); 详情参考API msg() 方法
+3. 增强引用 iframe 框架功能，在不跨域情况下，弹窗宽高自适应，如有设定宽高，按设定的来
+4. 增加 $M.getIframe(window.name) 方法 用于获取当前 iframe 的弹窗对象 详情参见API iframe 参数
+5. iframe 具体用法可参考 Demo 案例中的 iframe.html 页面
+6. 增加 iframe loading 交互
+7. 废除了$M.iframe() 的方法
+8. 增强了 $M.content() 方法的健壮性，支持 HTMLElement
+
 ## Update Ver 1.1  (2014-07-22)
 
 1. 增加 untitle, unclose, iframe 配置参数

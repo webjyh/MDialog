@@ -1,7 +1,7 @@
 /**
- * M.Dialog 1.1.0
+ * M.Dialog 2.0.0
  * Date: 2014-07-10
- * Update: 2014-07-22
+ * Update: 2014-10-09
  * (c) 2014-2014 M.J, http://webjyh.com
  *
  * This is licensed under the GNU LGPL, version 2.1 or later.
@@ -12,10 +12,11 @@
 .ui-dialog-wrap {
 	width: auto;
 	background: #cbcbcb;
+	background: rgba( 0, 0, 0, 0.3 );
 	font-family: Helvetica, arial, sans-serif;
 	font-size: 14px;
 	color: #555;
-	border-radius: 5px;
+	border-radius: 3px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 	-webkit-animation:transform-scale .3s;
 	        animation:transform-scale .3s;
@@ -51,12 +52,13 @@
 .ui-dialog-wrap .ui-dialog-header {
 	position: relative;
 	border-bottom: 1px solid #DDD;
+	_height: 100%;
 }
 
 /* MDialog ui-title */
 .ui-dialog-wrap .ui-dialog-title {
 	font-weight: bold;
-	padding: 15px 35px 15px 10px;
+	padding: 10px 35px 10px 10px;
 	white-space: nowrap;
 	overflow: hidden;
 	cursor: move;
@@ -99,19 +101,35 @@
 
 
 .ui-dialog-wrap .ui-dialog-header .untitle {
-	width: 25px !important;
-	height: 25px !important;
+	width: 23px !important;
+	height: 23px !important;
 	top: 0px !important;
 	right: 0px !important;
 	border-radius: 50% !important;
-	line-height: 24px !important;
-	box-shadow: 0px 0px 5px rgba( 0, 0, 0, 0.3 );
+	line-height: 22px !important;
+	box-shadow: 0px 0px 5px rgba( 0, 0, 0, 0.4 );
 	margin: -12px -12px 0px 0px !important;
 }
 
 /* MDialog ui-content */
 .ui-dialog-wrap .ui-dialog-content {
+	min-width: 160px;
+}
 
+.ui-dialog-wrap .ui-dialog-loading {
+	
+}
+.ui-dialog-wrap .ui-dialog-loading .loading-text {
+	position: absolute;
+	top: 45%;
+	left: 45%;
+	display: block;
+	text-align: center;
+	font-size: 16px;
+}
+
+.ui-dialog-wrap .ui-dialog-msg {
+	min-width: 0;
 }
 
 /* MDialog ui-footer */

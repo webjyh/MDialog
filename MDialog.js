@@ -1,7 +1,7 @@
 /**
- * M.Dialog 1.1.0
+ * M.Dialog 2.0.0
  * Date: 2014-07-10
- * Update: 2014-07-22
+ * Update: 2014-10-09
  * (c) 2014-2014 M.J, http://webjyh.com
  *
  * This is licensed under the GNU LGPL, version 2.1 or later.
@@ -21,7 +21,8 @@
 		return new MDialog.fn.init( options );
 	};
 
-	MDialog.version = '1.1.0';
+	//全局 Data
+	MDialog.version = '2.0.0';
 
 	//扩展原型，使上面返回的 new 对象 继承以下方法和属性。
 	MDialog.fn = MDialog.prototype = {
@@ -40,7 +41,9 @@
 			//this.top 修正IE下 FixedEvent Top 值问题
 			this.IE6 = !-[1,] && !win.XMLHttpRequest;
 			this.closeBoolean = false;
+			this.iframeId = null;
 			this.top = null;
+			
 
 			//默认配置项合并
 			this.config = this._cover( options, MDialog.defaults );
@@ -75,7 +78,6 @@
 
 			//弹窗初始化后的回调函数
 			if ( typeof this.config.init == 'function' ) this.config.init.call( this );
-
 		},
 
 		/**
@@ -259,14 +261,25 @@
 
 		/**
 		 * @access    Public
-		 * @name      设置弹窗内容为 一个 iframe 地址。
-		 * @example   this.iframe( 'http://www.baidu.com' );
+		 * @name      一个简单的提示信息
+		 * @example   this.msg( '欢迎使用 MDialog 对话框！' );
 		 * @return    {this}
 		 */
-		iframe: function( url ){
-			this.config.iframe = true;
+		msg: function( msg ){
+			var DOM = this.DOM;
+
+			this.config.untitle = true;
+			this.config.unclose = true;
+			this.config.fixed = true;
+			this.config.padding = '10px 15px';
 			this.config.top = '50%';
-			this._content( url );
+
+			DOM._content()._addClass('ui-dialog-msg');
+			DOM._content()._padding( this.config.padding );
+			DOM._footer()._hide();
+
+			this._title( this.config.title );
+			this._content( msg );
 			this._position( this.config.top, this.config.left, true );
 			return this;
 		},
@@ -310,10 +323,12 @@
 		 * @return    {this}
 		 */
 		_content: function( msg ){
-		 	var DOM = this.DOM,
-		 	    html = '';
-		 	( this.config.iframe ) ? html = '<iframe id="MDialog_IFRAME" name="MDialog_IFRAME" width="'+this.config.width+'" height="'+this.config.height+'" scrolling="auto" src="'+ msg +'" frameborder="0"></iframe>' : html = msg;
-		 	DOM._content()._html( html );
+		 	var DOM = this.DOM;
+		 	if ( this.config.iframe ){
+		 		this._createIframe( msg );
+		 	} else {
+		 		DOM._content()._html( msg );
+		 	}
 		 	return this;
 		},
 
@@ -519,6 +534,63 @@
 		},
 
 		/**
+		 * 创建 iframe 弹窗
+		 * @param  {String} msg iframe URL 地址
+		 * @return {this}
+		 */
+		_createIframe: function( msg ){
+			var iframe, p,
+			    _this = this,
+			    DOM = this.DOM;
+
+			// iframe数据源
+			this.iframeId = 'MDialog_IFRAME_' + win.MDialog.zIndex;
+			win.MDialog.iframeData[this.iframeId] = this;
+
+			// iframe Loading
+			DOM._title()._text('Loading...');
+			DOM._body()._addClass('ui-dialog-loading');
+
+			// 创建iframe
+			iframe = '<p class="loading-text">Loading...</p><iframe src="'+ msg +'" name="'+ this.iframeId +'" id="'+ this.iframeId +'" allowtransparency="true" scrolling="auto" frameborder="0" width="100%" height="100%" style="display: none;"></iframe>';
+			DOM._content()._html( iframe );
+			iframe = DOM._content()[0].getElementsByTagName('iframe')[0];
+			p = DOM._content()[0].getElementsByTagName('p')[0];
+			p.style.display = 'block';
+
+			// load 事件
+			this._sizzle( iframe )()._bind( 'load', function(){
+
+				//iframe 加载完成
+				iframe.style.display = 'block';
+				p.style.display = 'none';
+				DOM._title()._text(_this.config.title);
+				DOM._body()._removeClass('ui-dialog-loading');
+
+				var test;
+				try {
+					test = document.getElementById(_this.iframeId).contentWindow.document;
+				} catch( e ){ };
+
+				if ( test ){
+					outWidth = ( _this.config.width != 'auto' ) ? _this.config.width : test.documentElement.scrollWidth + 'px',
+					outHeight = ( _this.config.height != 'auto' ) ? _this.config.height : test.documentElement.scrollHeight + 'px';
+
+					DOM._body()._css({ width: 'auto', height: 'auto' });
+					DOM._content()._css({ 'width': outWidth, 'height': outHeight });
+				} else {
+					DOM._body()._css({ width: 'auto', height: 'auto' });
+					DOM._content()._css({ 'width': _this.config.width , 'height': _this.config.height });
+				}
+
+				_this._position( _this.config.top, _this.config.left, true );
+
+			});
+
+			return this;
+		},
+
+		/**
 		 * @access   Private
 		 * @name     设置弹窗相对窗口的位置
 		 * @param    {top}      {String}     距离窗口的顶部位置
@@ -558,6 +630,11 @@
 			}
 			this.top = _top;
 
+			//修正IE6下，第一次打开Top值问题
+			if ( this.IE6 && this.config.fixed ){
+				_top = parseInt( _top ) + scrollTop + 'px';
+			}
+
  			DOM._wrap()._css({ 'left': _left, 'top': _top });
  			if ( !resize ) DOM._wrap()._css( 'zIndex', win.MDialog.zIndex );
 
@@ -595,7 +672,12 @@
 				if ( typeof callback === 'function' ) callback.call( this );
 			}
 
+			if ( this.config.iframe ){
+				delete MDialog.iframeData[this.iframeId];
+			}
 			this.closeBoolean = true;
+
+			delete MDialog;
 			
 			return this;
 		},
@@ -631,8 +713,7 @@
 
 		/**
 		 * @access   Private
-		 * @name     页面resize时重新调整弹窗
-		 * @example  this._resize();      
+		 * @name     页面resize时重新调整弹窗     
 		 * @return   {this}
 		 */
 		_resize: function(){
@@ -880,7 +961,16 @@
 		 */
 		_html: function( html ){
 			var elem = this[0];
-			elem.innerHTML = html;
+			elem.innerHTML = '';
+
+			if ( html.nodeType && html.nodeType == 1 ){
+				elem.appendChild( html );
+			}
+
+			if ( html.nodeType && html.nodeType == 3 || typeof html == "string" ){
+				elem.innerHTML = html;
+			}
+
 			return this;
 		},
 
@@ -932,6 +1022,15 @@
 	//将 .fn.init() 方法 原型传递给 MDialog
 	MDialog.fn.init.prototype = MDialog.fn;
 
+	//获取 当前iframe 打开的弹窗
+	MDialog.iframeData = {};
+	MDialog.getIframe = function( name ){
+		if ( !name ){
+			return false;
+		}
+		return MDialog.iframeData[name];
+	};
+
 	//默认模板
 	MDialog.templates =
 	'<div class="MDialog-wrapper">' +
@@ -979,7 +1078,7 @@
 		padding: '20px 15px',       //设置默认填充
 		lock: false,                //是否支持锁屏
 		background: '#000',         //锁屏默认背景色
-		opacity: 0.7,               //锁屏默认透明
+		opacity: 0.3,               //锁屏默认透明
 		fixed: false,               //是否开启定位
 		esc: true,                  //是否支持ESC
 		time: null,                 //自动关闭时间

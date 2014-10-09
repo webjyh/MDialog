@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>MDialog Beta v1.1  || By M.J</title>
+	<title>MDialog Beta v2.0  || By M.J</title>
 
 	<!--Page CSS-->
 	<link rel="stylesheet" href="css/Global.css">
@@ -12,8 +12,8 @@
 	<script type="text/javascript">var isChrome = window.navigator.userAgent.indexOf('Chrome') !== -1;</script>
 	
 	<!-- MDialog css && JS -->
-	<link rel="stylesheet" href="MDialog.css?ver=1.1.0">
-	<script type="text/javascript" src="MDialog.js?ver=1.1.0"></script>
+	<link rel="stylesheet" href="MDialog.css?ver=2.0.0">
+	<script type="text/javascript" src="MDialog.js?ver=2.0.0"></script>
 	
 </head>
 <body>
@@ -23,7 +23,7 @@
 	<div class="wrapper">
 		<div class="wrapper-inner">
 
-			<h1 id="h1" title="MDialog Beta v1.1">MDialog  <small>Beta  v1.1</small></h1>
+			<h1 id="h1" title="MDialog Beta v2.0">MDialog  <small>Beta  v2.0</small></h1>
 			<div class="desc">
 				<p>寻求简单，精简的网页对话框，专注于友好的接口，千里之行，始于足下。</p>
 			</div>
@@ -103,6 +103,7 @@
 							<li><a href="#function-title" title="标题方法">title( Text )</a></li>
                             <li><a href="#function-untitle" title="隐藏标题并且设置是否显示关闭按钮">untitle( Boolean )</a></li>
 							<li><a href="#function-content" title="内容方法">content( HTML )</a></li>
+                            <li><a href="#function-msg" title="气泡提示框">msg( HTML )</a></li>
 							<li><a href="#function-statusbar" title="底部内容方法">statusbar( HTML )</a></li>
 							<li><a href="#function-time" title="自动关闭方法">time( Number )</a></li>
 							<li><a href="#function-close" title="关闭弹窗方法">close( function )</a></li>
@@ -113,7 +114,6 @@
 							<li><a href="#function-padding" title="设置填充值方法">padding( Value )</a></li>
 							<li><a href="#function-position" title="设置定位方法">position( top, left )</a></li>
 							<li><a href="#function-button" title="自定义按钮方法">button( Array )</a></li>
-                            <li><a href="#function-iframe" title="设置弹窗内容为iframe">iframe( URL )</a></li>
 						</ul>
 					</div>
 				</div>
@@ -161,14 +161,7 @@ HTML5 申明 &lt;!DOCTYPE HTML&gt;
 
 <div class="box" id="quick-bubble">
 <h3>气泡对话框</h3>
-<pre><code>$M({
-    title: 'MDialog',
-    untitle: true,
-    unclose: true,
-    time: 3,
-    content:'我是气泡对画框，三秒后自动关闭',
-    fixed: true
-});
+<pre><code>$M().msg('欢迎使用 MDialog 对话框！').lock().time(3);
 </code></pre>
 <button>运行</button>
 </div>
@@ -221,10 +214,12 @@ $M({
 <h3>阻止对话框关闭</h3>
 <pre><code>$M({
     title: 'MDialog',
-    content: '&lt;p&gt;点击按钮无法关闭对画框&lt;/p&gt;',
+    content: '&lt;p&gt;点击按钮无法关闭对画框&lt;/p&gt;为了用户体验，我设置了10秒后自动关闭',
     ok:function(){
         alert('不允许关闭');
     },
+    time: 10,
+    unclose: true,
     okVal: '提交',
     cancel: function(){
         alert('不允许关闭');
@@ -251,15 +246,12 @@ $M({
 <div class="box" id="quick-iframe">
 <h3>iframe 引用的内容</h3>
 <pre><code>$M({
-    title: 'MDialog',
+    title: 'iframe 调用',
     iframe: true,
     padding: 0,
     top: '50%',
     fixed: true,
-    width: '800px',
-    height: '600px',
-    untitle: true,
-    content: 'http://www.baidu.com/'
+    content: 'iframe.html'
 });
 </code></pre>
 <button>运行</button>
@@ -287,10 +279,19 @@ $M({
 </code></pre>
 <button>运行</button>
 
-<p><span>//HTMLElement 类型</span></p>
+<p><span>//HTML 类型</span></p>
 <pre><code>var elem = document.getElementById('h1').innerHTML;
 $M({
     content: elem
+});
+</code></pre>
+<button>运行</button>
+
+<p><span>//HTMLElement 类型</span></p>
+<div id="id_test"><p><strong style="font-weight: bold;">测试数据呵呵</strong></p></div>
+<pre><code>var elems = document.getElementById('id_test');
+$M({
+    content: elems
 });
 </code></pre>
 <button>运行</button>
@@ -702,10 +703,18 @@ $M({
 <div class="box" id="options-iframe">
 <h3>[iframe] <span>说明：引入一个 iframe 内容</span><span>默认： false</span><span>类型：( String )</span></h3>
 <p>
-    <span>//在设置 iframe 内容时，content: 参数只需要填写网址即可，并且需设置弹窗的宽高，因无法自适应获取iframe的宽高<br />
-    //需要在页面操作 iframe 的DOMN时，可以使用 window.frames['MDialog_IFRAME']; iframe ID 和 name 名都为 MDialog_IFRAME<br />
-    //PS：请不要 跨域操作。</span>
+    <span>//在设置 iframe 内容时，content: 参数只需要填写网址即可，如果是跨越请求则需要设置弹窗的宽高，无法自适应获取iframe的宽高<br />
+    //如果是同域名下iframe，可以获取宽高，在 FireFox 下会有最小高度（建议设置宽高来解决）<br /><br />
+    //如何在 iframe 中获取当前的 MDialog（勿跨域）<br />
+    var d = top.$M.getIframe(window.name);<br /><br />
+    
+    //此时变量 <strong>d</strong> 就会有当前 <strong>MDialog</strong> 所有的方法如：<br />
+    //这里为什么用 top(window.top) 而不用 parent(window.parent)<br />
+    //因为很有可能 ifrmae 嵌套 iframe 从而导致获取不到顶层的 <strong>MDialog</strong> 对象<br />
+    d.lock().width(500);
+   </span>
 </p>
+
 <pre><code>$M({
     title: '百度一下，你就知道',
     content: 'http://www.baidu.com',
@@ -775,6 +784,13 @@ m.untitle(true).time(3);
     }
 });
 m.content('我改变了对话框的内容');
+</code></pre>
+<button>运行</button>
+</div>
+
+<div class="box" id="function-msg">
+<h3>[msg( HTML )] <span>说明：以气泡的方式显示对话框，不显示标题和底部，支持链式调用</span><span>类型：(HTMLElement)</span></h3>
+<pre><code>$M().msg('我是气泡对话框').time(3);
 </code></pre>
 <button>运行</button>
 </div>
@@ -1047,20 +1063,6 @@ m.button([
 </div>
 
 
-<div class="box" id="function-iframe">
-<h3>[iframe( URL )] <span>说明：将对话框内容设置为 iframe 引用的内容，支持链式调用</span><span>类型：( String )</span></h3>
-<p><span>此方法配置注意事项请参见    配置参数<a href="#options-iframe">[iframe]</a></span></p>
-<pre><code>var m = $M({
-    title: 'iframe 内容测试',
-    fixed: true,
-    content: 'iframe 内容测试'
-});
-m.padding(0).width(800).height(600).untitle().iframe('http://www.baidu.com').lock();
-</code></pre>
-<button>运行</button>
-</div>
-
-
 <h2 id="desc"><strong>程序说明</strong><span></span></h2>
 <div class="box desc-text">
     <p>1.插件不支持 框架 穿透弹窗！</p>
@@ -1143,7 +1145,7 @@ m.padding(0).width(800).height(600).untitle().iframe('http://www.baidu.com').loc
                 target = event.target || event.srcElement,
                 href, top;
 
-            if ( event.target.nodeName === 'A' ){
+            if ( target.nodeName === 'A' ){
 
                 if ( event.preventDefault ){
                     event.preventDefault();
@@ -1151,7 +1153,7 @@ m.padding(0).width(800).height(600).untitle().iframe('http://www.baidu.com').loc
                     event.returnValue = false;
                 } 
 
-                href = target.getAttribute('href').toString().replace( '#', '' );
+                href = target.getAttribute('href').toString().match(/#(.+)/g)[0].replace('#', '');
                 top = document.getElementById(href).offsetTop;
                 fix = ( menu.className.toString().indexOf('fixed') > -1 ) ? 42 : 384 + 42 * 2;
                 window.scrollTo( 0, top - fix );
