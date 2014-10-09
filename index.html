@@ -50,6 +50,7 @@
                             <li class="line">[联系作者]</li>
                             <li><a href="#desc" title="程序说明">程序说明</a></li>
                             <li><a href="#author" title="作者本人">作者：M.J</a></li>
+                            <li><a href="#update" title="更新版本" style="color: red;">更新版本</a></li>
 						</ul>
 					</div>
 					<div class="clearfix">
@@ -1081,12 +1082,35 @@ m.button([
 
 <h2 id="desc"><strong>程序说明</strong><span></span></h2>
 <div class="box desc-text">
-    <p>1.插件不支持 框架 穿透弹窗！</p>
-    <p>2.本人也是在学习 JavaScript ，程序在使用时避免不了出现意外的Bug和缺少功能。</p>
-    <p>3.在使用前，请认真阅读插件文档。</p>
-    <p>4.如本插件有幸应用到你的项目中，谢谢你的支持。</p>
-    <p>5.程序兼容性: 理论兼容IE6+，Google Chrome, FireFox，但在IE6下难免会出现以外的Bug。</p>
-    <p>6.意见反馈: 如有一些使用问题或者插件的Bug，请到 <span><a href="#author">联系作者</a></span> 里联系我</p>
+    <p>1.本人也是在学习 JavaScript ，程序在使用时避免不了出现意外的Bug和缺少功能。</p>
+    <p>2.在使用前，请认真阅读插件文档。</p>
+    <p>3.如本插件有幸应用到你的项目中，谢谢你的支持。</p>
+    <p>4.程序兼容性: 理论兼容IE6+，Google Chrome, FireFox，但在IE6下难免会出现以外的Bug。</p>
+    <p>5.意见反馈: 如有一些使用问题或者插件的Bug，请到 <span><a href="#author">联系作者</a></span> 里联系我</p>
+</div>
+
+<h2 id="update"><strong>更新说明</strong><span></span></h2>
+<div class="box desc-text">
+	<p style="font-weight:bold; font-size: 16px;">Update Ver 2.0  (2014-10-09)</p>
+	<p>此版本增加了 iframe 框架功能，及一些弹窗细节修改</p>
+	<p>1. 增加了弹窗的最小宽和高度</p>
+	<p>2. 增加了气泡对话框简洁方法 $M().msg( content ); 详情参考API msg() 方法</p>
+	<p>3. 增强引用 iframe 框架功能，在不跨域情况下，弹窗宽高自适应，如有设定宽高，按设定的来</p>
+	<p>4. 增加 $M.getIframe(window.name) 方法 用于获取当前 iframe 的弹窗对象 详情参见API iframe 参数</p>
+	<p>5. iframe 具体用法可参考 Demo 案例中的 iframe.html 页面</p>
+	<p>6. 增加 iframe loading 交互</p>
+	<p>7. 废除了$M.iframe() 的方法</p>
+	<p>8. 增强了 $M.content() 方法的健壮性，支持 HTMLElement</p>
+
+    <br />
+
+    <p style="font-weight:bold; font-size: 16px;">Update Ver 1.1  (2014-07-22)</p>
+    <p>1. 增加 untitle, unclose, iframe 配置参数</p>
+    <p>2. 增加 untitle( Boolean ), iframe( URL ) 方法</p>
+    <p>3. 支持 AMD的方式 加载  如 require.js</p>
+    <p>4. 修正若干 Bug</p>
+    <p>5. 新增加的配置参数和方法，请到Demo页查看具体使用方法</p>
+
 </div>
 
 <h2 id="author"><strong>作者 M.J </strong><span></span></h2>
