@@ -714,7 +714,20 @@ $M({
     d.lock().width(500);
    </span>
 </p>
+<br />
+<p><span>//top.$M.getIframe(window.name)用法，参考iframe.html代码</span></p>
+<pre><code>$M({
+    title: 'iframe 调用',
+    iframe: true,
+    padding: 0,
+    top: '50%',
+    fixed: true,
+    content: 'iframe.html'
+});
+</code></pre>
+<button>运行</button>
 
+<p><span>//引用其它域名</span></p>
 <pre><code>$M({
     title: '百度一下，你就知道',
     content: 'http://www.baidu.com',
@@ -728,6 +741,9 @@ $M({
 });
 </code></pre>
 <button>运行</button>
+
+
+
 </div>
 
 
