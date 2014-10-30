@@ -6,6 +6,14 @@
 
 <http://demo.webjyh.com/MDialog/>
 
+## Update Ver 2.1 (2014-10-30)
+此版本增加了 iframe 载入事件 和 数据相互之间传递，及一些弹窗细节修改
+
+1. 增加 iframe 载入完成后的事件 oniframeload 详情参考API oniframeload 参数
+2. 增加 MDialog 数据之间传递功能 data 参数 详情参考API data 参数
+3. 修改 弹窗弹出 CSS3 动画
+4. 修正 iframe Loading 界面样式出错问题
+
 ## Update Ver 2.0  (2014-10-09)
 此版本增加了 iframe 框架功能，及一些弹窗细节修改
 

@@ -1,7 +1,7 @@
 /**
- * M.Dialog 2.0.0
+ * M.Dialog 2.1.0
  * Date: 2014-07-10
- * Update: 2014-10-09
+ * Update: 2014-10-30
  * (c) 2014-2014 M.J, http://webjyh.com
  *
  * This is licensed under the GNU LGPL, version 2.1 or later.
@@ -18,8 +18,8 @@
 	color: #555;
 	border-radius: 3px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-	-webkit-animation:transform-scale .3s;
-	        animation:transform-scale .3s;
+	-webkit-animation:transform-scale .4s;
+	        animation:transform-scale .4s;
 	-webkit-user-select: none;
 	   -moz-user-select: none;
 }
@@ -114,11 +114,9 @@
 /* MDialog ui-content */
 .ui-dialog-wrap .ui-dialog-content {
 	min-width: 160px;
+	min-height: 22px;
 }
 
-.ui-dialog-wrap .ui-dialog-loading {
-	
-}
 .ui-dialog-wrap .ui-dialog-loading .loading-text {
 	position: absolute;
 	top: 45%;
@@ -216,8 +214,8 @@
 }
 
 .ui-dialog-lock {
-	-webkit-animation:lock-fadeIn .3s;
-	        animation:lock-fadeIn .3s;  
+	-webkit-animation:lock-fadeIn .4s;
+	        animation:lock-fadeIn .4s;  
 }
 
 @keyframes lock-fadeIn {
@@ -229,11 +227,22 @@
 }
 
 @keyframes transform-scale {
-	0% { transform:scale(0); }
-	100%{ transform:scale(1); }
+	0%{opacity:0;transform:scale(0.2);-ms-transform:scale(0.2);}
+	60%{opacity:.75;transform:scale(1.1);-ms-transform:scale(1.1);}
+	100%{opacity:1;transform:scale(1);-ms-transform:scale(1);}
 }
-
+@-moz-keyframes transform-scale {
+	0%{opacity:0;-moz-transform:scale(0.2);}
+	60%{opacity:.75;-moz-transform:scale(1.1);}
+	100%{opacity:1;-moz-transform:scale(1);}
+}
 @-webkit-keyframes transform-scale {
-	0% { -webkit-transform:scale(0); }
-	100%{ -webkit-transform:scale(1); }
+	0%{opacity:0;-webkit-transform:scale(0.2);}
+	60%{opacity:.75;-webkit-transform:scale(1.1);}
+	100%{opacity:1;-webkit-transform:scale(1);}
+}
+@-o-keyframes transform-scale {
+	0%{opacity:0;-o-transform:scale(0.2);}
+	60%{opacity:.75;-o-transform:scale(1.1);}
+	100%{opacity:1;-o-transform:scale(1);}
 }

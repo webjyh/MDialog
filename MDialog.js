@@ -1,7 +1,7 @@
 /**
- * M.Dialog 2.0.0
+ * M.Dialog 2.1.0
  * Date: 2014-07-10
- * Update: 2014-10-09
+ * Update: 2014-10-30
  * (c) 2014-2014 M.J, http://webjyh.com
  *
  * This is licensed under the GNU LGPL, version 2.1 or later.
@@ -22,7 +22,7 @@
 	};
 
 	//全局 Data
-	MDialog.version = '2.0.0';
+	MDialog.version = '2.1.0';
 
 	//扩展原型，使上面返回的 new 对象 继承以下方法和属性。
 	MDialog.fn = MDialog.prototype = {
@@ -585,9 +585,11 @@
 
 				_this._position( _this.config.top, _this.config.left, true );
 
+				//iframe 载入完成回调函数
+				if ( typeof _this.config.oniframeload == 'function' ) _this.config.oniframeload.call( _this, test );
+
 			});
 
-			return this;
 		},
 
 		/**
@@ -1092,7 +1094,9 @@
 		cancelVal: '\u53d6\u6d88',  //取消按钮文字
 		button: null,               //默认自定义按钮
 		resize: true,               //是否绑定resize
+		data: null,                 //用户协助完成在MDialog数据传递
 		iframe: false,              //设置内容是否为iframe
+		oniframeload:null,          //设置iframe载入完回调函数
 		drag: true                  //是否支持拖拽
 	};
 

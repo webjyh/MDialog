@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>MDialog Beta v2.0  || By M.J</title>
+	<title>MDialog Beta v2.1  || By M.J</title>
 
 	<!--Page CSS-->
 	<link rel="stylesheet" href="css/Global.css">
@@ -12,8 +12,8 @@
 	<script type="text/javascript">var isChrome = window.navigator.userAgent.indexOf('Chrome') !== -1;</script>
 	
 	<!-- MDialog css && JS -->
-	<link rel="stylesheet" href="MDialog.css?ver=2.0.0">
-	<script type="text/javascript" src="MDialog.js?ver=2.0.0"></script>
+	<link rel="stylesheet" href="MDialog.css?ver=2.1.0">
+	<script type="text/javascript" src="MDialog.js?ver=2.1.0"></script>
 	
 </head>
 <body>
@@ -23,7 +23,7 @@
 	<div class="wrapper">
 		<div class="wrapper-inner">
 
-			<h1 id="h1" title="MDialog Beta v2.0">MDialog  <small>Beta  v2.0</small></h1>
+			<h1 id="h1" title="MDialog Beta v2.1">MDialog  <small>Beta  v2.1</small></h1>
 			<div class="desc">
 				<p>寻求简单，精简的网页对话框，专注于友好的接口，千里之行，始于足下。</p>
 			</div>
@@ -69,6 +69,7 @@
 							<li class="line">[回调函数]</li>
 							<li><a href="#options-init" title="载入之后回调函数">init</a></li>
 							<li><a href="#options-close" title="关闭之后回调函数">close</a></li>
+                            <li><a href="#options-oniframeload" title="iframe载入完成后的回调函数">oniframeload</a></li>
                             <li class="line">[位置]</li>
                             <li><a href="#options-left" title="距离窗口左边位置">left</a></li>
                             <li><a href="#options-top" title="距离窗口上边位置">top</a></li>
@@ -96,6 +97,7 @@
                             <li><a href="#options-resize" title="绑定resize事件">resize</a></li>
                             <li><a href="#options-drag" title="拖拽事件">drag</a></li>
                             <li><a href="#options-iframe" title="设置弹窗内容是否为iframe">iframe</a></li>
+                             <li><a href="#options-data" title="弹窗内部数据传递">data</a></li>
 						</ul>
 					</div>
 					<div class="last clearfix">
@@ -246,12 +248,25 @@ $M({
 
 <div class="box" id="quick-iframe">
 <h3>iframe 引用的内容</h3>
+<p><span>//oniframeload 中的 doc 参数等于 <strong>iframe.document</strong>, 而不是当前文档中的 <strong>document</strong> 请务必区分<br />
+//this.data 则用于协助在MDialog对象中传递数据
+</span></p>
 <pre><code>$M({
     title: 'iframe 调用',
     iframe: true,
     padding: 0,
     top: '50%',
     fixed: true,
+    close: function(){
+        var doc = this.data; 
+        $M({ 
+            content: doc.getElementById('text1').value
+        });
+    },
+    oniframeload: function(doc){
+        this.data = doc;
+        alert('iframe 载入完成');
+    },
     content: 'iframe.html'
 });
 </code></pre>
@@ -379,7 +394,7 @@ $M({
 </div>
 
 <div class="box" id="options-init">
-<h3>[init] <span>说明：对话框载入完毕回调的函数</span><span>默认：null</span><span>类型：(function(){})</span></h3>
+<h3>[init:function()] <span>说明：对话框载入完毕回调的函数</span><span>默认：null</span><span>类型：(function(){})</span></h3>
 <pre><code>$M({
     content: '&lt;p&gt;欢迎使用 MDialog 对话框！&lt;/p&gt;',
     init: function(){
@@ -392,7 +407,7 @@ $M({
 
 
 <div class="box" id="options-close">
-<h3>[close] <span>说明：对话框关闭时回调的函数</span><span>默认：null</span><span>类型：(function(){})</span></h3>
+<h3>[close:function()] <span>说明：对话框关闭时回调的函数</span><span>默认：null</span><span>类型：(function(){})</span></h3>
 <pre><code>$M({
     content: '&lt;p&gt;欢迎使用 MDialog 对话框！&lt;/p&gt;',
     close: function(){
@@ -560,7 +575,7 @@ $M({
 
 
 <div class="box" id="options-ok">
-<h3>[ok] <span>说明：设置对话框确定按钮的回调函数</span><span>默认： null  则不显示按钮</span><span>类型：(function(){})</span></h3>
+<h3>[ok:function()] <span>说明：设置对话框确定按钮的回调函数</span><span>默认： null  则不显示按钮</span><span>类型：(function(){})</span></h3>
 <p><span>//设置function类型 则点击不会关闭对话框，并且执行Function，Function 里的 this 指针指向 MDialog，即对话框本身对象。</span></p>
 <pre><code>$M({
     content: '欢迎使用 MDialog 对话框！',
@@ -583,7 +598,7 @@ $M({
 
 
 <div class="box" id="options-cancel">
-<h3>[cancel] <span>说明：设置对话框取消按钮的回调函数</span><span>默认： null  则不显示按钮</span><span>类型：(function(){})</span></h3>
+<h3>[cancel:function()] <span>说明：设置对话框取消按钮的回调函数</span><span>默认： null  则不显示按钮</span><span>类型：(function(){})</span></h3>
 <p>
 	<span>//设置function类型 则点击不会关闭对话框，并且执行Function，Function 里的 this 指针指向 MDialog，即对话框本身对象。<br />
 	//它和参数 Ok 只是在按钮焦点上不一样，Ok是 表示得到焦点，cancel 没有得到焦点</span>
@@ -723,6 +738,15 @@ $M({
     padding: 0,
     top: '50%',
     fixed: true,
+    close: function(){
+        var doc = this.data; 
+        $M({ 
+            content: doc.getElementById('text1').value
+        });
+    },
+    oniframeload: function(doc){
+        this.data = doc;
+    },
     content: 'iframe.html'
 });
 </code></pre>
@@ -742,13 +766,90 @@ $M({
 });
 </code></pre>
 <button>运行</button>
-
-
-
 </div>
 
 
-<h2><strong>配置选项</strong><span></span></h2>
+<div class="box" id="options-oniframeload">
+<h3>[oniframeload: function( doc )] <span>说明：iframe 载入完成后回调函数，此参数只有设置 iframe: true, 才能执行</span><span>类型(function)</span></h3>
+<p><span>//function( doc ){}; doc 参数等于 <strong>iframe.document</strong>, 而非当前文档中的 <strong>document</strong> 请务必区分</span></p>
+<pre><code>$M({
+    title: 'iframe 调用',
+    iframe: true,
+    padding: 0,
+    top: '50%',
+    fixed: true,
+    close: function(){
+        var doc = this.data; 
+        $M({ 
+            title: '数据是从 iframe 传出',
+            content: doc.getElementById('text1').value
+        });
+    },
+    oniframeload: function(doc){
+        this.data = doc;
+        this.lock();
+        alert('iframe 载入完成在 锁屏');
+    },
+    content: 'iframe.html'
+});
+</code></pre>
+<button>运行</button>
+</div>
+
+<div class="box" id="options-data">
+<h3>[data] <span>说明：用于协助在MDialog对象中传递数据</span><span>默认(null)</span></h3>
+<pre><code>$M({
+    title: 'MDialog',
+    content: '欢迎使用MDialog，点击传递按钮传数据',
+    okVal: '绑定数据',
+    ok: function(){
+        var info = {
+            author: 'M.J',
+            url: 'http://webjyh.com'
+        };
+        this.data = info;
+        alert('数据已绑定');
+    },
+    cancelVal: '获取数据',
+    cancel: function(){
+        if (this.data){
+            alert( '作者：'+this.data.author + '\n' + 'URL：'+ this.data.url );
+        } else {
+            alert('数据未绑定');
+        }
+    }
+});
+</code></pre>
+<button>运行</button>
+
+
+<p><span>//data 参数更使用于 iframe 之间的数据传递</p>
+<pre><code>$M({
+    title: 'iframe 调用',
+    iframe: true,
+    padding: 0,
+    top: '50%',
+    fixed: true,
+    close: function(){
+        var doc = this.data; 
+        $M({ 
+            title: '数据是从 iframe 传出',
+            content: doc.getElementById('text1').value
+        });
+    },
+    oniframeload: function(doc){
+        this.data = doc;
+        this.lock();
+        alert('iframe 载入完成在 锁屏');
+    },
+    content: 'iframe.html'
+});
+</code></pre>
+<button>运行</button>
+</div>
+
+
+<h2><strong>扩展方法</strong><span></span></h2>
 <div class="box" id="function-title">
 <h3>[title( val )] <span>说明：设置对话框标题方法，支持链式调用</span><span>类型：(String)</span></h3>
 <pre><code>var m = $M({
@@ -763,8 +864,6 @@ m.title('我是新标题');
 <button>运行</button>
 </div>
 
-
-<h2><strong>配置选项</strong><span></span></h2>
 <div class="box" id="function-untitle">
 <h3>[untitle( Boolean )] <span>说明：设置对话框隐藏标题，并且设置是否显示关闭按钮，支持链式调用</span><span>默认： false</span><span>类型：(Boolean)</span></h3>
 
@@ -998,36 +1097,63 @@ m.position( '100%', 0 );
 </code></pre>
 <button>运行</button>
 
-<p><span>//五个方向的弹窗位置</span></p>
+<p><span>//九个方向的弹窗位置</span></p>
 <pre><code>$M({
-    content: '欢迎使用 MDialog 对话框！',
+    top: '50%',
+    fixed: true,
+    content: "欢迎使用 MDialog 对话框！",
     button:[
         {
-            name: '左上角',
+            name: '↖',
             callback: function(){
                 this.position( 0, 0 );
             }
         },
         {
-            name: '右上角',
+            name: '↑',
+            callback: function(){
+                this.position( 0, '50%' );
+            }
+        },
+        {
+            name: '↗',
             callback: function(){
                 this.position( 0, '100%' );
             }
         },
         {
-            name: '居中',
+            name: '←',
+            callback: function(){
+                this.position( '50%', 0 );
+            }
+        },
+        {
+            name: '*',
+            focus: true,
             callback: function(){
                 this.position( '50%', '50%' );
             }
         },
         {
-            name: '左下角',
+            name: '→',
+            callback: function(){
+                this.position( '50%', '100%' );
+            }
+        },
+        {
+            name: '↙',
             callback: function(){
                 this.position( '100%', 0 );
             }
         },
         {
-            name: '右下角',
+            name: '↓',
+            callback: function(){
+                this.position( '100%', '50%' );
+            }
+        },
+        {
+            name: '↘',
             callback: function(){
                 this.position( '100%', '100%' );
             }
@@ -1091,6 +1217,15 @@ m.button([
 
 <h2 id="update"><strong>更新说明</strong><span></span></h2>
 <div class="box desc-text">
+    <p style="font-weight:bold; font-size: 16px;">Update Ver 2.1  (2014-10-30)</p>
+    <p>此版本增加了 iframe 载入事件 和 数据相互之间传递，及一些弹窗细节修改</p>
+    <p>1. 增加 iframe 载入完成后的事件 oniframeload 详情参考API oniframeload 参数</p>
+    <p>2. 增加 MDialog 数据之间传递功能  data 参数  详情参考API data 参数 </p>
+    <p>3. 修改 弹窗弹出 CSS3 动画</p>
+    <p>4. 修正 iframe Loading 界面样式出错问题</p>
+
+    <br />
+
 	<p style="font-weight:bold; font-size: 16px;">Update Ver 2.0  (2014-10-09)</p>
 	<p>此版本增加了 iframe 框架功能，及一些弹窗细节修改</p>
 	<p>1. 增加了弹窗的最小宽和高度</p>
