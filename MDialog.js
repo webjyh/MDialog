@@ -1,7 +1,7 @@
 /**
- * M.Dialog 2.1.0
+ * M.Dialog 2.1.1
  * Date: 2014-07-10
- * Update: 2014-10-30
+ * Update: 2014-11-04
  * (c) 2014-2014 M.J, http://webjyh.com
  *
  * This is licensed under the GNU LGPL, version 2.1 or later.
@@ -274,7 +274,7 @@
 			this.config.padding = '10px 15px';
 			this.config.top = '50%';
 
-			DOM._content()._addClass('ui-dialog-msg');
+			DOM._content()._addClass('ui-MDialog-msg');
 			DOM._content()._padding( this.config.padding );
 			DOM._footer()._hide();
 
@@ -401,8 +401,8 @@
 
 			//设置焦点事件
 			DOM._wrap()._bind('mousedown', function(){ _this._focusEvent(); });
-			DOM._header()._bind('mousedown', function(){ DOM._wrap()._addClass( 'ui-dialog-focus' ); });
-			DOM._wrap()._bind('mouseup', function(){ DOM._wrap()._removeClass( 'ui-dialog-focus' ); });
+			DOM._header()._bind('mousedown', function(){ DOM._wrap()._addClass( 'ui-MDialog-focus' ); });
+			DOM._wrap()._bind('mouseup', function(){ DOM._wrap()._removeClass( 'ui-MDialog-focus' ); });
 
 			//自动关闭弹窗
 			if ( this.config.time ){
@@ -442,7 +442,7 @@
 			
 			//TPL 操作
 			tpl.innerHTML = MDialog.templates;
-			tpl.className = 'ui-dialog-wrap';
+			tpl.className = 'ui-MDialog-wrap';
 			if ( this.config.id ) tpl.setAttribute( 'id', this.config.id );
 			
 			document.body.appendChild(tpl);
@@ -454,7 +454,7 @@
 			
 			//遍历 TPL 所有元素，取得所需的元素
 			for ( ; i < elemLen; i++ ){
-				var name = elem[i].className.replace('ui-dialog-', '');
+				var name = elem[i].className.replace('ui-MDialog-', '');
 				if ( name ) DOM['_'+name] = this._sizzle( elem[i] );
 			}
 
@@ -476,7 +476,7 @@
 			    IE6Select = '<iframe style="position:absolute;width:100%;height:100%;_filter:alpha(opacity=0);opacity=0;"></iframe>',
 			    index = win.MDialog.zIndex - 1;
 
-			tpl.className = 'ui-dialog-lock';
+			tpl.className = 'ui-MDialog-lock';
 			if ( this.IE6 ) tpl.innerHTML = IE6Select;
 
 			document.body.appendChild( tpl );
@@ -513,8 +513,8 @@
 				var _elem = this._sizzle( document.createElement('button') );
 
 				_elem()._text( arr[i].name );
-				if ( arr[i].focus ) _elem()._addClass('ui-dialog-autofocus');
-				if ( arr[i].disabled ) _elem()._addClass('ui-dialog-disabled');
+				if ( arr[i].focus ) _elem()._addClass('ui-MDialog-autofocus');
+				if ( arr[i].disabled ) _elem()._addClass('ui-MDialog-disabled');
 
 				if ( typeof arr[i].callback == 'function' ){
 					var callback = function(obj){
@@ -549,7 +549,7 @@
 
 			// iframe Loading
 			DOM._title()._text('Loading...');
-			DOM._body()._addClass('ui-dialog-loading');
+			DOM._body()._addClass('ui-MDialog-loading');
 
 			// 创建iframe
 			iframe = '<p class="loading-text">Loading...</p><iframe src="'+ msg +'" name="'+ this.iframeId +'" id="'+ this.iframeId +'" allowtransparency="true" scrolling="auto" frameborder="0" width="100%" height="100%" style="display: none;"></iframe>';
@@ -565,7 +565,7 @@
 				iframe.style.display = 'block';
 				p.style.display = 'none';
 				DOM._title()._text(_this.config.title);
-				DOM._body()._removeClass('ui-dialog-loading');
+				DOM._body()._removeClass('ui-MDialog-loading');
 
 				var test;
 				try {
@@ -1036,28 +1036,28 @@
 	//默认模板
 	MDialog.templates =
 	'<div class="MDialog-wrapper">' +
-		'<table class="ui-dialog-table">' +
+		'<table class="ui-MDialog-table">' +
 			'<tbody>' +
 				'<tr>' +
 					'<td>' +
-						'<div class="ui-dialog-header">' +
-							'<a class="ui-dialog-close" href="javascript:;">x</a>' +
-							'<div class="ui-dialog-title"></div>' +
+						'<div class="ui-MDialog-header">' +
+							'<a class="ui-MDialog-close" href="javascript:void(0);">x</a>' +
+							'<div class="ui-MDialog-title"></div>' +
 						'</div>' +
 					'</td>' +
 				'</tr>' +
 				'<tr>' +
 					'<td>' +
-						'<div class="ui-dialog-body">' +
-							'<div class="ui-dialog-content"></div>' +
+						'<div class="ui-MDialog-body">' +
+							'<div class="ui-MDialog-content"></div>' +
 						'</div>' +
 					'</td>' +
 				'</tr>' +
 				'<tr>' +
 					'<td>' +
-						'<div class="ui-dialog-footer">' +
-							'<div class="ui-dialog-statusbar"></div>' +
-							'<div class="ui-dialog-bottom"></div>' +
+						'<div class="ui-MDialog-footer">' +
+							'<div class="ui-MDialog-statusbar"></div>' +
+							'<div class="ui-MDialog-bottom"></div>' +
 							'<div style="clear:both;height:0;overflow:hidden;"></div>' +
 						'</div>' +
 					'</td>' +
