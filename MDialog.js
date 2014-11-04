@@ -22,7 +22,7 @@
 	};
 
 	//全局 Data
-	MDialog.version = '2.1.0';
+	MDialog.version = '2.1.1';
 
 	//扩展原型，使上面返回的 new 对象 继承以下方法和属性。
 	MDialog.fn = MDialog.prototype = {
