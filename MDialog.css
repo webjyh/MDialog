@@ -11,6 +11,7 @@
 /* MDialog ui-wrap */
 .ui-MDialog-wrap {
 	width: auto;
+	display: none;
 	background: #cbcbcb;
 	background: rgba( 0, 0, 0, 0.3 );
 	font-family: Helvetica, arial, sans-serif;

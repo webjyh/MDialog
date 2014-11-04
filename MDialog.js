@@ -59,13 +59,15 @@
 
 			//创建 MDialog Element
 			this.DOM = DOM = this._createDOM();
-			if ( this.config.lock ) this._createLock();
 
 			//设置CSS
 			DOM._body()._css({ 'width': this.config.width, 'height': this.config.height });
 			DOM._content()._padding( this.config.padding );
 			DOM._footer()._hide();
 			DOM._title()._css( 'cursor', this.config.drag ? 'move' : 'auto' );
+
+			if ( this.config.lock ) this._createLock();
+			DOM._wrap()._show();
 
 			//初始化
 			this
