@@ -129,6 +129,8 @@
 
 .ui-MDialog-wrap .ui-MDialog-msg {
 	min-width: 0;
+	min-height: 0;
+	line-height: 1;
 }
 
 /* MDialog ui-footer */
