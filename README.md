@@ -6,6 +6,10 @@
 
 <http://demo.webjyh.com/MDialog/>
 
+## Update Ver 2.2.0 (2014-11-30)
+1. 修复 button 方法直接传入 html 不显示的问题
+2. 修复 $M().Msg() 方法下 下样式问题
+
 ## Update Ver 2.1.1 (2014-11-04)
 1. 修正 jQuery ui Dialog 样式冲突的问题
 2. 修复锁屏高度计算出错问题

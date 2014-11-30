@@ -1,7 +1,7 @@
 /**
- * M.Dialog 2.1.1
+ * M.Dialog 2.2.0
  * Date: 2014-07-10
- * Update: 2014-11-04
+ * Update: 2014-11-30
  * (c) 2014-2014 M.J, http://webjyh.com
  *
  * This is licensed under the GNU LGPL, version 2.1 or later.
@@ -22,7 +22,7 @@
 	};
 
 	//全局 Data
-	MDialog.version = '2.1.1';
+	MDialog.version = '2.2.0';
 
 	//扩展原型，使上面返回的 new 对象 继承以下方法和属性。
 	MDialog.fn = MDialog.prototype = {
@@ -514,7 +514,7 @@
 			for ( ; i<arrLen; i++ ){
 				var _elem = this._sizzle( document.createElement('button') );
 
-				_elem()._text( arr[i].name );
+				_elem()._html( arr[i].name );
 				if ( arr[i].focus ) _elem()._addClass('ui-MDialog-autofocus');
 				if ( arr[i].disabled ) _elem()._addClass('ui-MDialog-disabled');
 
